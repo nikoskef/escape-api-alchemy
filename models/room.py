@@ -8,7 +8,7 @@ class RoomModel(db.Model):
     company = db.Column(db.String(40))
     location = db.Column(db.String(80))
     name = db.Column(db.String(40))
-    description = db.Column(db.String(200))
+    description = db.Column(db.String(1000))
     rateofescape = db.Column(db.String(20))
     image = db.Column(db.String(80))
     duration = db.Column(db.String(30))
@@ -28,14 +28,14 @@ class RoomModel(db.Model):
     def json(self):
         return {
             'id': self.id,
-            'Company': self.company,
-            'Location': self.location,
-            'Name': self.name,
-            'Description': self.description,
-            'Rate of Escape': self.rateofescape,
-            'Image': self.image,
-            'Duration': self.duration,
-            'Played On': self.playedon
+            'company': self.company,
+            'location': self.location,
+            'name': self.name,
+            'description': self.description,
+            'rateofescape': self.rateofescape,
+            'image': self.image,
+            'duration': self.duration,
+            'playedon': self.playedon
         }
 
     @classmethod

@@ -20,7 +20,7 @@ class Room(Resource):
         parser.add_argument('name',
                             type=str,
                             required=True,
-                            help='You must enter a location'
+                            help='You must enter a name'
                             )
         data = parser.parse_args()
         room = RoomModel.find_by_name_company(**data)
@@ -84,7 +84,6 @@ class RoomCreate(Resource):
     def post(self):
         data = RoomCreate.parser.parse_args()
         room = RoomModel.find_by_name_company(data['name'], data['company'])
-        print(room)
         if room:
             return {'message': "'{}' by '{}' already exists".format(data['name'], data['company'])}, 400
 
