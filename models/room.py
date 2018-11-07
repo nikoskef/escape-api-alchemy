@@ -5,13 +5,13 @@ class RoomModel(db.Model):
     __tablename__ = 'rooms'
 
     id = db.Column(db.Integer, primary_key=True)
-    company = db.Column(db.String(40))
-    location = db.Column(db.String(80))
-    name = db.Column(db.String(40))
-    description = db.Column(db.String(1000))
+    company = db.Column(db.String(40), nullable=False)
+    location = db.Column(db.String(80), nullable=False)
+    name = db.Column(db.String(40), nullable=False)
+    description = db.Column(db.String(1200))
     rateofescape = db.Column(db.String(20))
     image = db.Column(db.String(80))
-    duration = db.Column(db.String(30))
+    duration = db.Column(db.String(30), nullable=False)
     playedon = db.Column(db.String(80))
 
     def __init__(self, _id, company, location, name, description, rateofescape, image, duration, playedon):
