@@ -1,5 +1,5 @@
 from models.user import UserModel
-from test.unit.unit_base_test import UnitBaseTest
+from tests.unit.unit_base_test import UnitBaseTest
 
 
 class UserTest(UnitBaseTest):
