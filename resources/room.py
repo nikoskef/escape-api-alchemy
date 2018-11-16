@@ -1,16 +1,21 @@
 from flask_restful import Resource, reqparse
 from models.room import RoomModel
-from flask_jwt import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_claims
 
 
 class Room(Resource):
+    @jwt_required
     def get(self, _id):
         room = RoomModel.find_by_id(_id)
         if room:
             return room.json()
         return {'message': 'Room not Found'}, 404
 
+    @jwt_required
     def delete(self, _id):
+        claims = get_jwt_claims()
+        if not claims['is_admin']:
+            return {'message': 'Admin privilege required.'}, 401
         parser = reqparse.RequestParser()
         parser.add_argument('company',
                             type=str,

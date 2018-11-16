@@ -1,8 +1,8 @@
 Flask
 Flask-RESTful
-Flask-JWT
 Flask-JWT-Extended
 Flask-Cors
 Flask-SQLAlchemy
 uwsgi
 psycopg2
+werkzeug

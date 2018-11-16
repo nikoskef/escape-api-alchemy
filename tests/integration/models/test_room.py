@@ -1,5 +1,5 @@
 from models.room import RoomModel
-from tests.integration.integration_base_test import BaseTest
+from tests.base_test import BaseTest
 
 
 class ItemTest(BaseTest):
