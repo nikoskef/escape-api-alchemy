@@ -14,8 +14,14 @@ class UserTest(BaseTest):
                 self.assertDictEqual({'message': 'User created successfully'},
                                      json.loads(request.data))
 
-    def test_register_and_login(self):
-        pass
+    def test_register_username_empty(self):
+        with self.app() as client:
+            with self.app_context():
+                response = client.post('/register', data={})
+
+                self.assertEqual(response.status_code, 400)
+                self.assertDictEqual({'message': {'username': 'You must enter a username'}},
+                                     json.loads(response.data))
 
     def test_register_duplicate_user(self):
         with self.app() as client:
@@ -26,3 +32,13 @@ class UserTest(BaseTest):
                 self.assertEqual(request.status_code, 400)
                 self.assertDictEqual({'message': 'A user with that username already exists'},
                                      json.loads(request.data))
+
+    def test_register_and_login(self):
+        with self.app() as client:
+            with self.app_context():
+                client.post('/register', data={'username': 'test', 'password': '1234'})
+                auth_response = client.post('/login',
+                                            data=json.dumps({'username': 'test', 'password': '1234'}),
+                                            headers={'Content-Type': 'application/json'})
+
+                self.assertIn('access_token', json.loads(auth_response.data).keys())
